@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useMemo, useCallback, useState, useEffect } from 'react'
 import { timeframeOptions, SUPPORTED_LIST_URLS__NO_ENS } from '../constants'
+import Web3 from 'web3'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import getTokenList from '../utils/tokenLists'
@@ -10,16 +11,18 @@ dayjs.extend(utc)
 const UPDATE = 'UPDATE'
 const UPDATE_TIMEFRAME = 'UPDATE_TIMEFRAME'
 const UPDATE_SESSION_START = 'UPDATE_SESSION_START'
+const UPDATE_WEB3 = 'UPDATE_WEB3'
 const UPDATED_SUPPORTED_TOKENS = 'UPDATED_SUPPORTED_TOKENS'
 const UPDATE_LATEST_BLOCK = 'UPDATE_LATEST_BLOCK'
-const UPDATE_HEAD_BLOCK = 'UPDATE_HEAD_BLOCK'
+const UPDATED_SUPPORTED_TOKENS_MAP = 'UPDATED_SUPPORTED_TOKENS_MAP'
 
 const SUPPORTED_TOKENS = 'SUPPORTED_TOKENS'
+const SUPPORTED_TOKENS_MAP = 'SUPPORTED_TOKENS_MAP'
 const TIME_KEY = 'TIME_KEY'
 const CURRENCY = 'CURRENCY'
 const SESSION_START = 'SESSION_START'
+const WEB3 = 'WEB3'
 const LATEST_BLOCK = 'LATEST_BLOCK'
-const HEAD_BLOCK = 'HEAD_BLOCK'
 
 const ApplicationContext = createContext()
 
@@ -33,21 +36,28 @@ function reducer(state, { type, payload }) {
       const { currency } = payload
       return {
         ...state,
-        [CURRENCY]: currency,
+        [CURRENCY]: currency
       }
     }
     case UPDATE_TIMEFRAME: {
       const { newTimeFrame } = payload
       return {
         ...state,
-        [TIME_KEY]: newTimeFrame,
+        [TIME_KEY]: newTimeFrame
       }
     }
     case UPDATE_SESSION_START: {
       const { timestamp } = payload
       return {
         ...state,
-        [SESSION_START]: timestamp,
+        [SESSION_START]: timestamp
+      }
+    }
+    case UPDATE_WEB3: {
+      const { web3 } = payload
+      return {
+        ...state,
+        [WEB3]: web3
       }
     }
 
@@ -55,15 +65,7 @@ function reducer(state, { type, payload }) {
       const { block } = payload
       return {
         ...state,
-        [LATEST_BLOCK]: block,
-      }
-    }
-
-    case UPDATE_HEAD_BLOCK: {
-      const { block } = payload
-      return {
-        ...state,
-        [HEAD_BLOCK]: block,
+        [LATEST_BLOCK]: block
       }
     }
 
@@ -71,7 +73,15 @@ function reducer(state, { type, payload }) {
       const { supportedTokens } = payload
       return {
         ...state,
-        [SUPPORTED_TOKENS]: supportedTokens,
+        [SUPPORTED_TOKENS]: supportedTokens
+      }
+    }
+
+    case UPDATED_SUPPORTED_TOKENS_MAP: {
+      const { supportedTokens } = payload
+      return {
+        ...state,
+        [SUPPORTED_TOKENS_MAP]: supportedTokens
       }
     }
 
@@ -84,63 +94,73 @@ function reducer(state, { type, payload }) {
 const INITIAL_STATE = {
   CURRENCY: 'USD',
   TIME_KEY: timeframeOptions.ALL_TIME,
+  [SUPPORTED_TOKENS_MAP]: {}
 }
 
 export default function Provider({ children }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
-  const update = useCallback((currency) => {
+  const update = useCallback(currency => {
     dispatch({
       type: UPDATE,
       payload: {
-        currency,
-      },
+        currency
+      }
     })
   }, [])
 
   // global time window for charts - see timeframe options in constants
-  const updateTimeframe = useCallback((newTimeFrame) => {
+  const updateTimeframe = useCallback(newTimeFrame => {
     dispatch({
       type: UPDATE_TIMEFRAME,
       payload: {
-        newTimeFrame,
-      },
+        newTimeFrame
+      }
     })
   }, [])
 
   // used for refresh button
-  const updateSessionStart = useCallback((timestamp) => {
+  const updateSessionStart = useCallback(timestamp => {
     dispatch({
       type: UPDATE_SESSION_START,
       payload: {
-        timestamp,
-      },
+        timestamp
+      }
     })
   }, [])
 
-  const updateSupportedTokens = useCallback((supportedTokens) => {
+  const updateWeb3 = useCallback(web3 => {
+    dispatch({
+      type: UPDATE_WEB3,
+      payload: {
+        web3
+      }
+    })
+  }, [])
+
+  const updateSupportedTokens = useCallback(supportedTokens => {
     dispatch({
       type: UPDATED_SUPPORTED_TOKENS,
       payload: {
-        supportedTokens,
-      },
+        supportedTokens
+      }
     })
   }, [])
 
-  const updateLatestBlock = useCallback((block) => {
+  const updateLatestBlock = useCallback(block => {
     dispatch({
       type: UPDATE_LATEST_BLOCK,
       payload: {
-        block,
-      },
+        block
+      }
     })
   }, [])
 
-  const updateHeadBlock = useCallback((block) => {
+  const updateSupportedTokensMap = useCallback(supportedTokens => {
     dispatch({
-      type: UPDATE_HEAD_BLOCK,
+      type: UPDATED_SUPPORTED_TOKENS_MAP,
       payload: {
-        block,
-      },
+        supportedTokens
+      }
     })
   }, [])
 
@@ -149,16 +169,9 @@ export default function Provider({ children }) {
       value={useMemo(
         () => [
           state,
-          {
-            update,
-            updateSessionStart,
-            updateTimeframe,
-            updateSupportedTokens,
-            updateLatestBlock,
-            updateHeadBlock,
-          },
+          { update, updateSessionStart, updateTimeframe, updateWeb3, updateSupportedTokens, updateLatestBlock, updateSupportedTokensMap }
         ],
-        [state, update, updateTimeframe, updateSessionStart, updateSupportedTokens, updateLatestBlock, updateHeadBlock]
+        [state, update, updateTimeframe, updateWeb3, updateSessionStart, updateSupportedTokens, updateLatestBlock, updateSupportedTokensMap]
       )}
     >
       {children}
@@ -166,36 +179,31 @@ export default function Provider({ children }) {
   )
 }
 
-export function useLatestBlocks() {
-  const [state, { updateLatestBlock, updateHeadBlock }] = useApplicationContext()
+export function useLatestBlock() {
+  const [state, { updateLatestBlock }] = useApplicationContext()
 
   const latestBlock = state?.[LATEST_BLOCK]
-  const headBlock = state?.[HEAD_BLOCK]
 
   useEffect(() => {
     async function fetch() {
-      healthClient
-        .query({
-          query: SUBGRAPH_HEALTH,
+      try {
+        const res = await healthClient.query({
+          query: SUBGRAPH_HEALTH
         })
-        .then((res) => {
-          const syncedBlock = res.data.indexingStatusForCurrentVersion.chains[0].latestBlock.number
-          const headBlock = res.data.indexingStatusForCurrentVersion.chains[0].chainHeadBlock.number
-          if (syncedBlock && headBlock) {
-            updateLatestBlock(syncedBlock)
-            updateHeadBlock(headBlock)
-          }
-        })
-        .catch((e) => {
-          console.log(e)
-        })
+        const block = res.data.indexingStatusForCurrentVersion.chains[0].latestBlock.number
+        if (block) {
+          updateLatestBlock(block)
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
     if (!latestBlock) {
       fetch()
     }
-  }, [latestBlock, updateHeadBlock, updateLatestBlock])
+  }, [latestBlock, updateLatestBlock])
 
-  return [latestBlock, headBlock]
+  return latestBlock
 }
 
 export function useCurrentCurrency() {
@@ -263,6 +271,24 @@ export function useSessionStart() {
   return parseInt(seconds / 1000)
 }
 
+/**
+ * @todo this isnt used now - if ever needed probably better to use
+ * web3-react instead of this custom hook
+ */
+export function useWeb3() {
+  const [state, { updateWeb3 }] = useApplicationContext()
+  const web3 = state?.[WEB3]
+
+  useEffect(() => {
+    if (!web3) {
+      const web3 = new Web3(new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_URL))
+      updateWeb3(web3)
+    }
+  })
+
+  return web3
+}
+
 export function useListedTokens() {
   const [state, { updateSupportedTokens }] = useApplicationContext()
   const supportedTokens = state?.[SUPPORTED_TOKENS]
@@ -274,13 +300,39 @@ export function useListedTokens() {
         const newTokens = await getTokenList(url)
         return Promise.resolve([...tokensSoFar, ...newTokens.tokens])
       }, Promise.resolve([]))
-      let formatted = allFetched?.map((t) => t.address.toLowerCase())
+      let formatted = allFetched?.map(t => t.address.toLowerCase())
       updateSupportedTokens(formatted)
     }
     if (!supportedTokens) {
       fetchList()
     }
   }, [updateSupportedTokens, supportedTokens])
+
+  return supportedTokens
+}
+
+export function useListedTokensMap() {
+  const [state, { updateSupportedTokensMap }] = useApplicationContext()
+  const supportedTokens = state?.[SUPPORTED_TOKENS_MAP]
+
+  useEffect(() => {
+    async function fetchList() {
+      const allFetched = await SUPPORTED_LIST_URLS__NO_ENS.reduce(async (fetchedTokens, url) => {
+        const tokensSoFar = await fetchedTokens
+        const newTokens = await getTokenList(url)
+        return Promise.resolve([...tokensSoFar, ...newTokens.tokens])
+      }, Promise.resolve([]))
+
+      const formatted = {}
+      for (const token of allFetched) {
+        formatted[token.address.toLowerCase()] = token
+      }
+      updateSupportedTokensMap(formatted)
+    }
+    if (Object.keys(supportedTokens).length === 0) {
+      fetchList()
+    }
+  }, [updateSupportedTokensMap, supportedTokens])
 
   return supportedTokens
 }

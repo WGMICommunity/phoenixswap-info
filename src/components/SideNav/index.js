@@ -169,17 +169,12 @@ function SideNav({ history }) {
               </Link>
             </HeaderText>
             <HeaderText>
-              <Link href="https://levinswap.org" target="_blank">
+              <Link href="https://github.com/levinswap" target="_blank">
                 Docs
               </Link>
             </HeaderText>
             <HeaderText>
-              <Link href="https://levinswap.org" target="_blank">
-                Discord
-              </Link>
-            </HeaderText>
-            <HeaderText>
-              <Link href="https://levinswap.org" target="_blank">
+              <Link href="https://twitter.com/levinswap" target="_blank">
                 Twitter
               </Link>
             </HeaderText>

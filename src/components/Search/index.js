@@ -18,7 +18,6 @@ import { client } from '../../apollo/client'
 import { PAIR_SEARCH, TOKEN_SEARCH } from '../../apollo/queries'
 import FormattedName from '../FormattedName'
 import { TYPE } from '../../Theme'
-import { updateNameData } from '../../utils/data'
 
 const Container = styled.div`
   height: 48px;
@@ -111,7 +110,7 @@ const Menu = styled.div`
   width: 100%;
   top: 50px;
   max-height: 540px;
-  overflow: auto;
+  overflow: scroll;
   left: 0;
   padding-bottom: 20px;
   background: ${({ theme }) => theme.bg6};
@@ -186,11 +185,11 @@ export const Search = ({ small = false }) => {
       try {
         if (value?.length > 0) {
           let tokens = await client.query({
-            query: TOKEN_SEARCH,
             variables: {
               value: value ? value.toUpperCase() : '',
               id: value,
             },
+            query: TOKEN_SEARCH,
           })
 
           let pairs = await client.query({
@@ -200,13 +199,8 @@ export const Search = ({ small = false }) => {
               id: value,
             },
           })
-
-          setSearchedPairs(
-            updateNameData(pairs.data.as0)
-              .concat(updateNameData(pairs.data.as1))
-              .concat(updateNameData(pairs.data.asAddress))
-          )
-          const foundTokens = tokens.data.asSymbol.concat(tokens.data.asAddress).concat(tokens.data.asName)
+          setSearchedPairs(pairs.data.as0.concat(pairs.data.as1).concat(pairs.data.asAddress))
+          let foundTokens = tokens.data.asSymbol.concat(tokens.data.asAddress).concat(tokens.data.asName)
           setSearchedTokens(foundTokens)
         }
       } catch (e) {
@@ -220,11 +214,10 @@ export const Search = ({ small = false }) => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
   }
 
-  // add the searched tokens to the list if not found yet
+  // add the searched tokens to the list if now found yet
   allTokens = allTokens.concat(
     searchedTokens.filter((searchedToken) => {
       let included = false
-      updateNameData()
       allTokens.map((token) => {
         if (token.id === searchedToken.id) {
           included = true
@@ -466,8 +459,14 @@ export const Search = ({ small = false }) => {
           )}
           {filteredPairList &&
             filteredPairList.slice(0, pairsShown).map((pair) => {
-              //format incorrect names
-              updateNameData(pair)
+              if (pair?.token0?.id === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2') {
+                pair.token0.name = 'xDai (Wrapped)'
+                pair.token0.symbol = 'xDai'
+              }
+              if (pair?.token1.id === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2') {
+                pair.token1.name = 'xDai (Wrapped)'
+                pair.token1.symbol = 'xDai'
+              }
               return (
                 <BasicLink to={'/pair/' + pair.id} key={pair.id} onClick={onDismiss}>
                   <MenuItem>
@@ -501,8 +500,6 @@ export const Search = ({ small = false }) => {
             </MenuItem>
           )}
           {filteredTokenList.slice(0, tokensShown).map((token) => {
-            // update displayed names
-            updateNameData({ token0: token })
             return (
               <BasicLink to={'/token/' + token.id} key={token.id} onClick={onDismiss}>
                 <MenuItem>

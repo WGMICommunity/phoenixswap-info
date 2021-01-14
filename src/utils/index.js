@@ -57,25 +57,12 @@ export function getPoolLink(token0Address, token1Address = null, remove = false)
 
 export function getSwapLink(token0Address, token1Address = null) {
   if (!token1Address) {
-    return `https://levinswap.org/swap?inputCurrency=${token0Address}`
+    return `https://levinswap.org/https://uniswap.exchange/swap?inputCurrency=${token0Address}`
   } else {
     return `https://levinswap.org/swap?inputCurrency=${
       token0Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token0Address
     }&outputCurrency=${token1Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token1Address}`
   }
-}
-
-export function getMiningPoolLink(token0Address) {
-  return `https://levinswap.org/#/uni/ETH/${token0Address}`
-}
-
-export function getUniswapAppLink(linkVariable) {
-  let baseUniswapUrl = 'https://levinswap.org/#/uni'
-  if (!linkVariable) {
-    return baseUniswapUrl
-  }
-
-  return `${baseUniswapUrl}/ETH/${linkVariable}`
 }
 
 export function localNumber(val) {
@@ -295,9 +282,9 @@ export const Big = (number) => new BigNumber(number)
 
 export const urls = {
   showTransaction: (tx) => `https://blockscout.com/poa/xdai/tx/${tx}/`,
-  showAddress: (address) => `https://blockscout.com/poa/xdai//address/${address}/`,
-  showToken: (address) => `https://blockscout.com/poa/xdai//token/${address}/`,
-  showBlock: (block) => `https://blockscout.com/poa/xdai/block/${block}/`,
+  showAddress: (address) => `https://blockscout.com/poa/xdai/address/${address}/`,
+  showToken: (address) => `https://blockscout.com/poa/xdai/address/${address}/`,
+  showBlock: (block) => `https://blockscout.com/poa/xdai/blocks/11210674${block}/`,
 }
 
 export const formatTime = (unix) => {
@@ -325,15 +312,11 @@ export const formatNumber = (num) => {
 }
 
 // using a currency library here in case we want to add more in future
-export const formatDollarAmount = (num, digits) => {
-  const formatter = new Intl.NumberFormat([], {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  })
-  return formatter.format(num)
-}
+var priceFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+})
 
 export const toSignificant = (number, significantDigits) => {
   Decimal.set({ precision: significantDigits + 1, rounding: Decimal.ROUND_UP })
@@ -363,18 +346,21 @@ export const formattedNum = (number, usd = false, acceptNegatives = false) => {
   }
 
   if (num > 1000) {
-    return usd ? formatDollarAmount(num, 0) : Number(parseFloat(num).toFixed(0)).toLocaleString()
+    return usd
+      ? '$' + Number(parseFloat(num).toFixed(0)).toLocaleString()
+      : '' + Number(parseFloat(num).toFixed(0)).toLocaleString()
   }
 
   if (usd) {
     if (num < 0.1) {
-      return formatDollarAmount(num, 4)
+      return '$' + Number(parseFloat(num).toFixed(4))
     } else {
-      return formatDollarAmount(num, 2)
+      let usdString = priceFormatter.format(num)
+      return '$' + usdString.slice(1, usdString.length)
     }
   }
 
-  return Number(parseFloat(num).toFixed(5)).toLocaleString()
+  return Number(parseFloat(num).toFixed(5))
 }
 
 export function rawPercent(percentRaw) {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { isAddress } from '../../utils/index.js'
 import PlaceHolder from '../../assets/placeholder.png'
-import xDaiLogo from '../../assets/xdai-logo.png'
+import EthereumLogo from '../../assets/eth.png'
+import { useListedTokensMap } from '../../contexts/Application'
 
 const BAD_IMAGES = {}
 
@@ -20,7 +20,7 @@ const Image = styled.img`
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
 `
 
-const StyledxDaiLogo = styled.div`
+const StyledEthereumLogo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +33,7 @@ const StyledxDaiLogo = styled.div`
 
 export default function TokenLogo({ address, header = false, size = '24px', ...rest }) {
   const [error, setError] = useState(false)
+  const listedTokensMap = useListedTokensMap()
 
   useEffect(() => {
     setError(false)
@@ -57,22 +58,20 @@ export default function TokenLogo({ address, header = false, size = '24px', ...r
 
   if (address?.toLowerCase() === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2') {
     return (
-      <StyledxDaiLogo size={size} {...rest}>
+      <StyledEthereumLogo size={size} {...rest}>
         <img
-          src={xDaiLogo}
-          style={{
-            boxShadow: '0px 6px 10px rgba(0, 0, 0, 0.075)',
-            borderRadius: '24px',
-          }}
+          src={EthereumLogo}
+          style={{ boxShadow: '0px 6px 10px rgba(0, 0, 0, 0.075)', borderRadius: '24px' }}
           alt=""
         />
-      </StyledxDaiLogo>
+      </StyledEthereumLogo>
     )
   }
 
-  const path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${isAddress(
-    address
-  )}/logo.png`
+  const path = listedTokensMap[address]?.logoURI
+  if (!path) {
+    setError(true)
+  }
 
   return (
     <Inline>
@@ -81,7 +80,7 @@ export default function TokenLogo({ address, header = false, size = '24px', ...r
         alt={''}
         src={path}
         size={size}
-        onError={(event) => {
+        onError={event => {
           BAD_IMAGES[address] = true
           setError(true)
           event.preventDefault()

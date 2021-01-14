@@ -2,7 +2,7 @@ import React from 'react'
 
 const Attribution = () => (
   <p className="attribution">
-    <a href="https://github.com/Levinswap/uniswap-info" rel="noopener noreferrer" target="_blank">
+    <a href="https://github.com/levinswap/uniswap-info" rel="noopener noreferrer" target="_blank">
       Github
     </a>{' '}
     |{' '}
