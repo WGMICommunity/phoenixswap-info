@@ -294,10 +294,10 @@ export const setThemeColor = (theme) => document.documentElement.style.setProper
 export const Big = (number) => new BigNumber(number)
 
 export const urls = {
-  showTransaction: (tx) => `https://etherscan.io/tx/${tx}/`,
-  showAddress: (address) => `https://www.etherscan.io/address/${address}/`,
-  showToken: (address) => `https://www.etherscan.io/token/${address}/`,
-  showBlock: (block) => `https://etherscan.io/block/${block}/`,
+  showTransaction: (tx) => `https://blockscout.com/poa/xdai/tx/${tx}/`,
+  showAddress: (address) => `https://blockscout.com/poa/xdai//address/${address}/`,
+  showToken: (address) => `https://blockscout.com/poa/xdai//token/${address}/`,
+  showBlock: (block) => `https://blockscout.com/poa/xdai/block/${block}/`,
 }
 
 export const formatTime = (unix) => {
