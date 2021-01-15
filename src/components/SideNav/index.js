@@ -169,7 +169,7 @@ function SideNav({ history }) {
               </Link>
             </HeaderText>
             <HeaderText>
-              <Link href="https://github.com/levinswap" target="_blank">
+              <Link href="https://wiki.levinswap.org/levinswap-wiki/" target="_blank">
                 Docs
               </Link>
             </HeaderText>
