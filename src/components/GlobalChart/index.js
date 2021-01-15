@@ -12,12 +12,12 @@ import { TYPE } from '../../Theme'
 
 const CHART_VIEW = {
   VOLUME: 'Volume',
-  LIQUIDITY: 'Liquidity'
+  LIQUIDITY: 'Liquidity',
 }
 
 const VOLUME_WINDOW = {
   WEEKLY: 'WEEKLY',
-  DAYS: 'DAYS'
+  DAYS: 'DAYS',
 }
 const GlobalChart = ({ display }) => {
   // chart options
@@ -35,7 +35,7 @@ const GlobalChart = ({ display }) => {
     volumeChangeUSD,
     liquidityChangeUSD,
     oneWeekVolume,
-    weeklyVolumeChange
+    weeklyVolumeChange,
   } = useGlobalData()
 
   // based on window, get starttim
@@ -46,7 +46,7 @@ const GlobalChart = ({ display }) => {
     return (
       currentData &&
       Object.keys(currentData)
-        ?.map(key => {
+        ?.map((key) => {
           let item = currentData[key]
           if (item.date > utcStartTime) {
             return item
@@ -54,7 +54,7 @@ const GlobalChart = ({ display }) => {
             return
           }
         })
-        .filter(item => {
+        .filter((item) => {
           return !!item
         })
     )
@@ -79,7 +79,7 @@ const GlobalChart = ({ display }) => {
   return chartDataFiltered ? (
     <>
       {below800 && (
-        <DropdownSelect options={CHART_VIEW} active={chartView} setActive={setChartView} color={'#ff007a'} />
+        <DropdownSelect options={CHART_VIEW} active={chartView} setActive={setChartView} color={'#D7B04E'} />
       )}
 
       {chartDataFiltered && chartView === CHART_VIEW.LIQUIDITY && (

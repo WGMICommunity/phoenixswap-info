@@ -19,7 +19,7 @@ const Loader = styled.div`
   & > * {
     width: 72px;
   }
-  ${props =>
+  ${(props) =>
     props.fill && !props.height
       ? css`
           height: 100vh;
@@ -34,7 +34,7 @@ const LocalLoader = ({ fill }) => {
 
   return (
     <Loader fill={fill}>
-      <img src={require(darkMode ? '../../assets/logo_white.svg' : '../../assets/logo.svg')} alt="loading-icon" />
+      <img src={require(darkMode ? '../../assets/lightning.svg' : '../../assets/lightning.svg')} alt="loading-icon" />
     </Loader>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Bee from '../../assets/bee.svg'
+import Bee from '../../assets/lightning.svg'
 
 // const rotate = keyframes`
 //  0% {
