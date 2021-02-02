@@ -11,7 +11,7 @@ export const timeframeOptions = {
 }
 
 // token list urls to fetch tokens from - use for warnings on tokens and pairs
-export const SUPPORTED_LIST_URLS__NO_ENS = ['https://tokens.honeyswap.org']
+export const SUPPORTED_LIST_URLS__NO_ENS = ['https://ipfs.io/ipfs/QmQ7CzT7zURtBV31BGG7WKv3jA7V5msmNaNcfv7GePNTgg?filename=Tokenlist']
 
 // hide from overview list
 export const OVERVIEW_TOKEN_BLACKLIST = [
