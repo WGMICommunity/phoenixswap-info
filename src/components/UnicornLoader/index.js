@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Bee from '../../assets/lightning.svg'
 
-// const rotate = keyframes`
+// const rotate = keyframes`  
 //  0% {
 //     opacity: 0;
 //     transform: translate3d(-100%, 0, 0);
