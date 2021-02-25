@@ -15,7 +15,6 @@ import { withRouter } from 'react-router-dom'
 import { OVERVIEW_TOKEN_BLACKLIST } from '../../constants'
 import FormattedName from '../FormattedName'
 import { TYPE } from '../../Theme'
-import { useListedTokensMap } from '../../contexts/Application'
 
 dayjs.extend(utc)
 
@@ -135,8 +134,6 @@ function TopTokenList({ tokens, itemMax = 10 }) {
   const below680 = useMedia('(max-width: 680px)')
   const below600 = useMedia('(max-width: 600px)')
 
-  const listedTokensMap = useListedTokensMap();
-
   useEffect(() => {
     setMaxPage(1) // edit this to do modular
     setPage(1)
@@ -147,7 +144,7 @@ function TopTokenList({ tokens, itemMax = 10 }) {
       tokens &&
       Object.keys(tokens)
         .filter(key => {
-          return !OVERVIEW_TOKEN_BLACKLIST.includes(key) && listedTokensMap[key]
+          return !OVERVIEW_TOKEN_BLACKLIST.includes(key)
         })
         .map(key => tokens[key])
     )
