@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   width: 100px;
   padding: 4px 10px;
   padding-right: 6px;
-  border-radius: 8px;
+  Border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@ const Dropdown = styled.div`
   background-color: ${({ theme }) => theme.bg1};
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 10px 10px;
-  border-radius: 8px;
+  Border-radius: 5px;
   width: calc(100% - 20px);
   font-weight: 500;
   font-size: 1rem;

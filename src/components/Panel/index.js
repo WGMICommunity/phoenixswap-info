@@ -26,7 +26,7 @@ const Panel = styled(RebassBox)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-radius: 8px;
+  Border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.bg3};
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);  /* box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.01), 0px 16px 24px rgba(0, 0, 0, 0.01), 0px 24px 32px rgba(0, 0, 0, 0.01); */
   :hover {
@@ -43,10 +43,10 @@ const Panel = styled(RebassBox)`
     css`
       @media only screen and (min-width: 40em) {
         &:first-of-type {
-          border-radius: 20px 20px 0 0;
+          border-radius: 5px 5px 0 0;
         }
         &:last-of-type {
-          border-radius: 0 0 20px 20px;
+          border-radius: 0 0 5px 5px;
         }
       }
     `}
@@ -54,9 +54,9 @@ const Panel = styled(RebassBox)`
   ${props =>
     props.rounded &&
     css`
-      border-radius: 8px;
+      Border-radius: 5px;
       @media only screen and (min-width: 40em) {
-        border-radius: 10px;
+        border-radius: 5px;
       }
     `};
 
@@ -71,7 +71,7 @@ export default Panel
 //   display: flex;
 //   flex-direction: column;
 //   justify-content: flex-start;
-//   border-radius: 12px;
+//   Border-radius: 5px;
 //   background-color: ${({ theme }) => theme.advancedBG};
 //   padding: 1.25rem;
 //   box-sizing: border-box;

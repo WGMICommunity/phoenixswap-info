@@ -29,7 +29,7 @@ const LogoBox = styled.div`
 const CustomMenu = styled.div`
   background-color: white;
   position: absolute;
-  border-radius: 16px;
+  border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(47, 128, 237, 0.1), 0 0 0 0.5px var(--c-zircon);
   overflow: hidden;
   padding: 0;

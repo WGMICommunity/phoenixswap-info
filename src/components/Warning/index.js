@@ -11,7 +11,7 @@ import Link from '../Link'
 import { useMedia } from 'react-use'
 
 const WarningWrapper = styled.div`
-  border-radius: 20px;
+  border-radius: 5px;
   border: 1px solid #f82d3a;
   background: rgba(248, 45, 58, 0.05);
   padding: 1rem;

@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  border-radius: 12px;
+  Border-radius: 5px;
 `
 
 const Input = styled.input`
@@ -34,7 +34,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   padding: 12px 16px;
-  border-radius: 12px;
+  Border-radius: 5px;
   color: ${({ theme }) => theme.text1};
   background-color: ${({ theme }) => theme.bg1};
   font-size: 16px;

@@ -10,8 +10,15 @@ export const timeframeOptions = {
   ALL_TIME: 'All time',
 }
 
+// token lists
+const LEVINSWAP_LIST = 'https://ipfs.io/ipfs/QmWgmoPRMPKV17FJbGtMfEQm5Cgfq8Wb69BXTN1TSfSP5i?filename=levinswap-default.tokenlist.json'
+const LEVINSWAP_STABLECOIN_LIST = 'https://ipfs.io/ipfs/QmWrhnRTCQ8CgSoNmHV6WsneLLhErouD4fQPpSaqhsibpD?filename=levinswap-stablecoin-tokenlist.json'
+const REALT_LIST = 'https://api.realt.ch/v1/tokenList'
+const REN_LIST = 'https://ipfs.io/ipfs/QmVfccE1JwFoXYD2KC3sMLjXNrCURXAUHQooogNrn3LZQf?filename=ren-default.tokenlist.json'
+const SYNTHETIX_LST = 'https://ipfs.io/ipfs/QmbZvrV7YsF6eKP8umoauqi7FFTG4KgtQBjTeLfVFJpxZj?filename=synthetix-default.tokenlist.json'
+
 // token list urls to fetch tokens from - use for warnings on tokens and pairs
-export const SUPPORTED_LIST_URLS__NO_ENS = ['https://ipfs.io/ipfs/QmX8KFXvKrpqJ1ET16JXNPYhqQn73qRRbZRHiRX6Rui9Zn?filename=Tokenlist']
+export const SUPPORTED_LIST_URLS__NO_ENS = [LEVINSWAP_LIST, LEVINSWAP_STABLECOIN_LIST, REALT_LIST, REN_LIST, SYNTHETIX_LST]
 
 // hide from overview list
 export const OVERVIEW_TOKEN_BLACKLIST = [
