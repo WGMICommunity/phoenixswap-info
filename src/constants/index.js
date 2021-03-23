@@ -11,14 +11,15 @@ export const timeframeOptions = {
 }
 
 // token lists
-const LEVINSWAP_LIST = 'https://ipfs.io/ipfs/QmWgmoPRMPKV17FJbGtMfEQm5Cgfq8Wb69BXTN1TSfSP5i?filename=levinswap-default.tokenlist.json'
+const LEVINSWAP_LIST = 'https://ipfs.io/ipfs/QmVjmLAgkWuNxHAE9Um9KuwEJmTEk82LzdEqLnfiZ5NQpR?filename=levinswap-default.tokenlist.json'
 const LEVINSWAP_STABLECOIN_LIST = 'https://ipfs.io/ipfs/QmWrhnRTCQ8CgSoNmHV6WsneLLhErouD4fQPpSaqhsibpD?filename=levinswap-stablecoin-tokenlist.json'
 const REALT_LIST = 'https://api.realt.ch/v1/tokenList'
-const REN_LIST = 'https://ipfs.io/ipfs/QmVfccE1JwFoXYD2KC3sMLjXNrCURXAUHQooogNrn3LZQf?filename=ren-default.tokenlist.json'
+const REN_LIST = 'https://ipfs.io/ipfs/QmS55aGgkVoZLj87qP2VZMrnmv5PupMsDVvUp6tBHfReLF?filename=ren-default.tokenlist.json'
 const SYNTHETIX_LST = 'https://ipfs.io/ipfs/QmbZvrV7YsF6eKP8umoauqi7FFTG4KgtQBjTeLfVFJpxZj?filename=synthetix-default.tokenlist.json'
+const BSC_LIST = 'https://ipfs.io/ipfs/QmbFFNszCPSUZktXYdjVd7wSaqnMxeXedrQWC5zcuEk8pv?filename=bsc-default.tokenlist.json'
 
 // token list urls to fetch tokens from - use for warnings on tokens and pairs
-export const SUPPORTED_LIST_URLS__NO_ENS = [LEVINSWAP_LIST, LEVINSWAP_STABLECOIN_LIST, REALT_LIST, REN_LIST, SYNTHETIX_LST]
+export const SUPPORTED_LIST_URLS__NO_ENS = [LEVINSWAP_LIST, LEVINSWAP_STABLECOIN_LIST, REALT_LIST, REN_LIST, SYNTHETIX_LST, BSC_LIST]
 
 // hide from overview list
 export const OVERVIEW_TOKEN_BLACKLIST = [
@@ -29,7 +30,7 @@ export const OVERVIEW_TOKEN_BLACKLIST = [
 ]
 
 // pair blacklist
-export const PAIR_BLACKLIST = ['0xb6a741f37d6e455ebcc9f17e2c16d0586c3f57a5']
+export const PAIR_BLACKLIST = ['0xb6a741f37d6e455ebcc9f17e2c16d0586c3f57a5', '0x64e8A115Ec254A6A5949dbC5801A8Ccf3AE4F72F']
 
 /**
  * For tokens that cause erros on fee calculations
