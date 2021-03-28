@@ -126,7 +126,7 @@ function AccountPage({ account }) {
   const dynamicPositions = activePosition ? [activePosition] : positions
 
   const aggregateFees = dynamicPositions?.reduce(function (total, position) {
-    return position.fees.sum
+    return total + position.fees.sum
   }, 0)
 
   const positionValue = useMemo(() => {
@@ -204,11 +204,11 @@ function AccountPage({ account }) {
                 <Flyout>
                   <AutoColumn gap="0px">
                     {positions?.map((p, i) => {
-                      if (p.pair.token1.symbol === 'WETH') {
-                        p.pair.token1.symbol = 'ETH'
+                      if (p.pair.token1.symbol === 'WXDAI') {
+                        p.pair.token1.symbol = 'xDai'
                       }
-                      if (p.pair.token0.symbol === 'WETH') {
-                        p.pair.token0.symbol = 'ETH'
+                      if (p.pair.token0.symbol === 'WXDAI') {
+                        p.pair.token0.symbol = 'xDai'
                       }
                       return (
                         p.pair.id !== activePosition?.pair.id && (
