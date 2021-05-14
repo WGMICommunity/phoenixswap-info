@@ -11,7 +11,7 @@ export const timeframeOptions = {
 }
 
 // token lists
-const LEVINSWAP_LIST = 'https://ipfs.io/ipfs/QmUWxthidUYXUJ2kiZLLPxkMKYDAinnpA591R3SRN6wufs?filename=levinswap-default.tokenlist.json'
+const LEVINSWAP_LIST = 'https://ipfs.io/ipfs/QmUmN7Be3LLHiEwcVZDm6WsPjcTddWsc6C7hrLCmPzsanv?filename=levinswap-default.tokenlist.json'
 const LEVINSWAP_STABLECOIN_LIST = 'https://ipfs.io/ipfs/QmWrhnRTCQ8CgSoNmHV6WsneLLhErouD4fQPpSaqhsibpD?filename=levinswap-stablecoin-tokenlist.json'
 const REALT_LIST = 'https://api.realt.community/v1/tokenList'
 const REN_LIST = 'https://ipfs.io/ipfs/QmSqYWWdzfngm57int8AesJr1APRBBYxC8knmYC9rN4ECj?filename=ren-default.tokenlist.json'
