@@ -9,7 +9,7 @@ const WrappedLink = ({ external, children, ...rest }) => (
   <RebassLink
     target={external ? '_blank' : null}
     rel={external ? 'noopener noreferrer' : null}
-    color="#2f80ed"
+    color="#34fbeb"
     {...rest}
   >
     {children}
@@ -17,7 +17,7 @@ const WrappedLink = ({ external, children, ...rest }) => (
 )
 
 WrappedLink.propTypes = {
-  external: PropTypes.bool
+  external: PropTypes.bool,
 }
 
 const Link = styled(WrappedLink)`

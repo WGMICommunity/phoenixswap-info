@@ -102,7 +102,7 @@ function TokenPage({ address, history }) {
     priceChangeUSD,
     liquidityChangeUSD,
     oneDayTxns,
-    txnChange
+    txnChange,
   } = useTokenData(address)
 
   useEffect(() => {
@@ -129,8 +129,8 @@ function TokenPage({ address, history }) {
     oneDayVolumeUSD || oneDayVolumeUSD === 0
       ? formattedNum(oneDayVolumeUSD === 0 ? oneDayVolumeUT : oneDayVolumeUSD, true)
       : oneDayVolumeUSD === 0
-        ? '$0'
-        : '-'
+      ? '$0'
+      : '-'
 
   // mark if using untracked volume
   const [usingUtVolume, setUsingUtVolume] = useState(false)
@@ -163,7 +163,7 @@ function TokenPage({ address, history }) {
   useEffect(() => {
     window.scrollTo({
       behavior: 'smooth',
-      top: 0
+      top: 0,
     })
   }, [])
 
@@ -188,7 +188,7 @@ function TokenPage({ address, history }) {
               style={{ width: 'fit-content' }}
               color={backgroundColor}
               external
-              href={'https://blockscout.com/poa/xdai/address/' + address}
+              href={'https://etherscan.io/address/' + address}
             >
               <Text style={{ marginLeft: '.15rem' }} fontSize={'14px'} fontWeight={400}>
                 ({address.slice(0, 8) + '...' + address.slice(36, 42)})
@@ -324,7 +324,7 @@ function TokenPage({ address, history }) {
               rounded
               style={{
                 marginTop: '1.5rem',
-                padding: '1.125rem 0 '
+                padding: '1.125rem 0 ',
               }}
             >
               {address && fetchedPairsList ? (
@@ -346,7 +346,7 @@ function TokenPage({ address, history }) {
               <Panel
                 rounded
                 style={{
-                  marginTop: '1.5rem'
+                  marginTop: '1.5rem',
                 }}
                 p={20}
               >
@@ -373,8 +373,8 @@ function TokenPage({ address, history }) {
                     </AutoRow>
                   </Column>
                   <ButtonLight color={backgroundColor}>
-                    <Link color={backgroundColor} external href={'https://blockscout.com/poa/xdai/address/' + address}>
-                      View on Blockscout ↗
+                    <Link color={backgroundColor} external href={'https://etherscan.io/address/' + address}>
+                      View on Etherscan ↗
                     </Link>
                   </ButtonLight>
                 </TokenDetailsLayout>

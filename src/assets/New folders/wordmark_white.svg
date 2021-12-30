@@ -2,7 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        font-size: 59px;
+        font-size: 49px;
         fill: #fff;
         text-anchor: middle;
         font-family: Corbel;
@@ -10,5 +10,5 @@
       }
     </style>
   </defs>
-  <text id="LEVINSWAP" class="cls-1" transform="translate(205 57.499) scale(1.2)"><tspan x="0">LEVINSWAP</tspan></text>
+  <text id="PHOENIXSWAP" class="cls-1" transform="translate(205 57.499) scale(1.2)"><tspan x="0">PHOENIXSWAP</tspan></text>
 </svg>

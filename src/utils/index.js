@@ -40,17 +40,18 @@ export function getTimeframe(timeWindow) {
 export function getPoolLink(token0Address, token1Address = null, remove = false) {
   if (!token1Address) {
     return (
-      `https://app.levinswap.org/` +
-      "#/" +
+      `` +
+      '#/' +
       (remove ? `remove` : `add`) +
-      `/${token0Address === '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d' ? 'ETH' : token0Address}/${'ETH'}`
+      `/${token0Address === '0xc778417e063141139fce010982780140aa0cd5ab' ? 'ETH' : token0Address}/${'ETH'}`
     )
   } else {
     return (
-      `https://app.levinswap.org/` +
-      "#/" +
+      `` +
+      '#/' +
       (remove ? `remove` : `add`) +
-      `/${token0Address === '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d' ? 'ETH' : token0Address}/${token1Address === '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d' ? 'WXDAI' : token1Address
+      `/${token0Address === '0xc778417e063141139fce010982780140aa0cd5ab' ? 'ETH' : token0Address}/${
+        token1Address === '0xc778417e063141139fce010982780140aa0cd5ab' ? 'WETH' : token1Address
       }`
     )
   }
@@ -58,10 +59,11 @@ export function getPoolLink(token0Address, token1Address = null, remove = false)
 
 export function getSwapLink(token0Address, token1Address = null) {
   if (!token1Address) {
-    return `https://app.levinswap.org/https://uniswap.exchange/swap?inputCurrency=${token0Address}`
+    return `https://uniswap.exchange/swap?inputCurrency=${token0Address}`
   } else {
-    return `https://app.levinswap.org/swap?inputCurrency=${token0Address === '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d' ? 'ETH' : token0Address
-      }&outputCurrency=${token1Address === '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d' ? 'ETH' : token1Address}`
+    return `https://app.phxswap.com/swap?inputCurrency=${
+      token0Address === '0xc778417e063141139fce010982780140aa0cd5ab' ? 'ETH' : token0Address
+    }&outputCurrency=${token1Address === '0xc778417e063141139fce010982780140aa0cd5ab' ? 'ETH' : token1Address}`
   }
 }
 
@@ -281,10 +283,10 @@ export const setThemeColor = (theme) => document.documentElement.style.setProper
 export const Big = (number) => new BigNumber(number)
 
 export const urls = {
-  showTransaction: (tx) => `https://blockscout.com/poa/xdai/tx/${tx}/`,
-  showAddress: (address) => `https://blockscout.com/poa/xdai/address/${address}/`,
-  showToken: (address) => `https://blockscout.com/poa/xdai/address/${address}/`,
-  showBlock: (block) => `https://blockscout.com/poa/xdai/blocks/11210674${block}/`,
+  showTransaction: (tx) => `https://etherscan.io/tx/${tx}/`,
+  showAddress: (address) => `https://etherscan.io/address/${address}/`,
+  showToken: (address) => `https://etherscan.io/address/${address}/`,
+  showBlock: (block) => `https://etherscan.io/blocks/11210674${block}/`,
 }
 
 export const formatTime = (unix) => {

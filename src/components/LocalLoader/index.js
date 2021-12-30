@@ -34,7 +34,7 @@ const LocalLoader = ({ fill }) => {
 
   return (
     <Loader fill={fill}>
-      <img src={require(darkMode ? '../../assets/lightning.svg' : '../../assets/lightning.svg')} alt="loading-icon" />
+      <img src={require(darkMode ? '../../assets/loader.png' : '../../assets/loader.png')} alt="loading-icon" />
     </Loader>
   )
 }

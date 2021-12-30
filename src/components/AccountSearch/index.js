@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  Border-radius: 5px;
+  border-radius: 5px;
 `
 
 const Input = styled.input`
@@ -34,7 +34,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   padding: 12px 16px;
-  Border-radius: 5px;
+  border-radius: 5px;
   color: ${({ theme }) => theme.text1};
   background-color: ${({ theme }) => theme.bg1};
   font-size: 16px;
@@ -94,7 +94,7 @@ function AccountSearch({ history, small }) {
             <Wrapper>
               <Input
                 placeholder="0x..."
-                onChange={e => {
+                onChange={(e) => {
                   setAccountValue(e.target.value)
                 }}
               />
@@ -112,7 +112,7 @@ function AccountSearch({ history, small }) {
             </DashGrid>
             <Divider />
             {savedAccounts?.length > 0 ? (
-              savedAccounts.map(account => {
+              savedAccounts.map((account) => {
                 return (
                   <DashGrid key={account} center={true} style={{ height: 'fit-content', padding: '1rem 0 0 0' }}>
                     <Flex
@@ -140,7 +140,7 @@ function AccountSearch({ history, small }) {
           <>
             <TYPE.main>{'Accounts'}</TYPE.main>
             {savedAccounts?.length > 0 ? (
-              savedAccounts.map(account => {
+              savedAccounts.map((account) => {
                 return (
                   <RowBetween key={account}>
                     <ButtonFaded onClick={() => history.push('/account/' + account)}>

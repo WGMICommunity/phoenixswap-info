@@ -38,8 +38,8 @@ const DashboardWrapper = styled.div`
 const DropdownWrapper = styled.div`
   position: relative;
   margin-bottom: 1rem;
-  border: 1px solid #edeef2;
-  Border-radius: 5px;
+  border: 1px solid #34fbeb;
+  border-radius: 5px;
 `
 
 const Flyout = styled.div`
@@ -52,7 +52,7 @@ const Flyout = styled.div`
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding-top: 4px;
-  border: 1px solid #edeef2;
+  border: 1px solid #34fbeb;
   border-top: none;
 `
 
@@ -98,8 +98,8 @@ function AccountPage({ account }) {
   let totalSwappedUSD = useMemo(() => {
     return transactions?.swaps
       ? transactions?.swaps.reduce((total, swap) => {
-        return total + parseFloat(swap.amountUSD)
-      }, 0)
+          return total + parseFloat(swap.amountUSD)
+        }, 0)
       : 0
   }, [transactions])
 
@@ -132,19 +132,19 @@ function AccountPage({ account }) {
   const positionValue = useMemo(() => {
     return dynamicPositions
       ? dynamicPositions.reduce((total, position) => {
-        return (
-          total +
-          (parseFloat(position?.liquidityTokenBalance) / parseFloat(position?.pair?.totalSupply)) *
-          position?.pair?.reserveUSD
-        )
-      }, 0)
+          return (
+            total +
+            (parseFloat(position?.liquidityTokenBalance) / parseFloat(position?.pair?.totalSupply)) *
+              position?.pair?.reserveUSD
+          )
+        }, 0)
       : null
   }, [dynamicPositions])
 
   useEffect(() => {
     window.scrollTo({
       behavior: 'smooth',
-      top: 0
+      top: 0,
     })
   }, [])
 
@@ -156,7 +156,7 @@ function AccountPage({ account }) {
         <RowBetween>
           <TYPE.body>
             <BasicLink to="/accounts">{'Accounts '}</BasicLink>→{' '}
-            <Link lineHeight={'145.23%'} href={'https://blockscout.com/poa/xdai/address/' + account} target="_blank">
+            <Link lineHeight={'145.23%'} href={'https://etherscan.io/address/' + account} target="_blank">
               {' '}
               {account?.slice(0, 42)}{' '}
             </Link>
@@ -167,8 +167,8 @@ function AccountPage({ account }) {
           <RowBetween>
             <span>
               <TYPE.header fontSize={24}>{account?.slice(0, 6) + '...' + account?.slice(38, 42)}</TYPE.header>
-              <Link lineHeight={'145.23%'} href={'https://blockscout.com/poa/xdai/address/' + account} target="_blank">
-                <TYPE.main fontSize={14}>View on Blockscout</TYPE.main>
+              <Link lineHeight={'145.23%'} href={'https://etherscan.io/address/' + account} target="_blank">
+                <TYPE.main fontSize={14}>View on Etherscan</TYPE.main>
               </Link>
             </span>
             <AccountWrapper>
@@ -204,11 +204,11 @@ function AccountPage({ account }) {
                 <Flyout>
                   <AutoColumn gap="0px">
                     {positions?.map((p, i) => {
-                      if (p.pair.token1.symbol === 'WXDAI') {
-                        p.pair.token1.symbol = 'xDai'
+                      if (p.pair.token1.symbol === 'WETH') {
+                        p.pair.token1.symbol = 'ETH'
                       }
-                      if (p.pair.token0.symbol === 'WXDAI') {
-                        p.pair.token0.symbol = 'xDai'
+                      if (p.pair.token0.symbol === 'WETH') {
+                        p.pair.token0.symbol = 'ETH'
                       }
                       return (
                         p.pair.id !== activePosition?.pair.id && (
@@ -260,8 +260,8 @@ function AccountPage({ account }) {
                       {positionValue
                         ? formattedNum(positionValue, true)
                         : positionValue === 0
-                          ? formattedNum(0, true)
-                          : '-'}
+                        ? formattedNum(0, true)
+                        : '-'}
                     </TYPE.header>
                   </RowFixed>
                 </AutoColumn>
@@ -295,7 +295,7 @@ function AccountPage({ account }) {
           </TYPE.main>{' '}
           <Panel
             style={{
-              marginTop: '1.5rem'
+              marginTop: '1.5rem',
             }}
           >
             <PositionList positions={positions} />
@@ -305,7 +305,7 @@ function AccountPage({ account }) {
           </TYPE.main>{' '}
           <Panel
             style={{
-              marginTop: '1.5rem'
+              marginTop: '1.5rem',
             }}
           >
             <TxnList transactions={transactions} />
@@ -315,7 +315,7 @@ function AccountPage({ account }) {
           </TYPE.main>{' '}
           <Panel
             style={{
-              marginTop: '1.5rem'
+              marginTop: '1.5rem',
             }}
           >
             <AutoRow gap="20px">

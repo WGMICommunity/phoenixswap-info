@@ -25,14 +25,14 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
       <ChartWrapper>
         <ResponsiveContainer aspect={isMobile ? 60 / 22 : 60 / 12}>
           <AreaChart margin={{ top: 0, right: 0, bottom: 6, left: 10 }} barCategoryGap={1} data={chartData}>
-            <CartesianGrid stroke="#f5f5f5" />
+            <CartesianGrid stroke="#34fbeb" />
             <XAxis
               tickLine={false}
               axisLine={false}
               interval="preserveEnd"
               tickMargin={14}
               minTickGap={80}
-              tickFormatter={tick => toNiceDate(tick)}
+              tickFormatter={(tick) => toNiceDate(tick)}
               dataKey="dayString"
             />
             <YAxis
@@ -40,7 +40,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               type="number"
               tickMargin={16}
               orientation="left"
-              tickFormatter={tick => toK(tick)}
+              tickFormatter={(tick) => toK(tick)}
               axisLine={false}
               tickLine={false}
               interval="preserveEnd"
@@ -52,7 +52,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               type="number"
               tickMargin={16}
               orientation="left"
-              tickFormatter={tick => toK(tick)}
+              tickFormatter={(tick) => toK(tick)}
               axisLine={false}
               tickLine={false}
               interval="preserveEnd"
@@ -63,7 +63,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               strokeWidth={2}
               dot={false}
               type="monotone"
-              name={currencyUnit === 'ETH' ? 'Price (xDai/' + symbol + ')' : 'Price (USD/' + symbol + ')'}
+              name={currencyUnit === 'ETH' ? 'Price (ETH/' + symbol + ')' : 'Price (USD/' + symbol + ')'}
               dataKey={currencyUnit === 'ETH' ? 'ethPerToken' : 'tokenPriceUSD'}
               yAxisId={2}
               fill="var(--c-token)"
@@ -74,7 +74,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               strokeWidth={2}
               dot={false}
               type="monotone"
-              name={currencyUnit === 'USD' ? 'Inverse (' + symbol + '/USD)' : 'Inverse (' + symbol + '/xDai)'}
+              name={currencyUnit === 'USD' ? 'Inverse (' + symbol + '/USD)' : 'Inverse (' + symbol + '/ETH)'}
               dataKey={currencyUnit === 'USD' ? 'tokensPerUSD' : 'tokensPerEth'}
               yAxisId={3}
               fill="var(--c-token)"
@@ -83,13 +83,13 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
             />
             <Tooltip
               cursor={true}
-              formatter={val => toK(val, true)}
-              labelFormatter={label => toNiceDateYear(label)}
+              formatter={(val) => toK(val, true)}
+              labelFormatter={(label) => toNiceDateYear(label)}
               labelStyle={{ paddingTop: 4 }}
               contentStyle={{
                 padding: '10px 14px',
                 borderRadius: 10,
-                borderColor: 'var(--c-zircon)'
+                borderColor: 'var(--c-zircon)',
               }}
               wrapperStyle={{ top: -70, left: -10 }}
             />
@@ -103,14 +103,14 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
       <ChartWrapper>
         <ResponsiveContainer aspect={isMobile ? 60 / 22 : 60 / 12}>
           <AreaChart margin={{ top: 0, right: 0, bottom: 6, left: 10 }} barCategoryGap={1} data={chartData}>
-            <CartesianGrid stroke="#f5f5f5" />
+            <CartesianGrid stroke="#34fbeb" />
             <XAxis
               tickLine={false}
               axisLine={false}
               interval="preserveEnd"
               tickMargin={14}
               minTickGap={80}
-              tickFormatter={tick => toNiceDate(tick)}
+              tickFormatter={(tick) => toNiceDate(tick)}
               dataKey="dayString"
             />
             <YAxis
@@ -118,7 +118,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               type="number"
               tickMargin={16}
               orientation="left"
-              tickFormatter={tick => toK(tick)}
+              tickFormatter={(tick) => toK(tick)}
               axisLine={false}
               tickLine={false}
               interval="preserveEnd"
@@ -130,7 +130,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               type="number"
               tickMargin={16}
               orientation="right"
-              tickFormatter={tick => toK(tick)}
+              tickFormatter={(tick) => toK(tick)}
               axisLine={false}
               tickLine={false}
               interval="preserveEnd"
@@ -139,13 +139,13 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
             />
             <Tooltip
               cursor={true}
-              formatter={val => toK(val, true)}
-              labelFormatter={label => toNiceDateYear(label)}
+              formatter={(val) => toK(val, true)}
+              labelFormatter={(label) => toNiceDateYear(label)}
               labelStyle={{ paddingTop: 4 }}
               contentStyle={{
                 padding: '10px 14px',
                 borderRadius: 10,
-                borderColor: 'var(--c-zircon)'
+                borderColor: 'var(--c-zircon)',
               }}
               wrapperStyle={{ top: -70, left: -10 }}
             />
@@ -153,7 +153,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               strokeWidth={2}
               dot={false}
               type="monotone"
-              name={'Total Liquidity' + (currencyUnit === 'USD' ? ' (USD)' : ' (xDai)')}
+              name={'Total Liquidity' + (currencyUnit === 'USD' ? ' (USD)' : ' (ETH)')}
               dataKey={currencyUnit === 'USD' ? 'usdLiquidity' : 'ethLiquidity'}
               yAxisId={0}
               fill="var(--c-token)"
@@ -162,7 +162,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
             />
             <Area
               type="monotone"
-              name={'xDai Balance'}
+              name={'ETH Balance'}
               dataKey={'ethBalance'}
               fill="var(--c-token)"
               opacity={'0'}
@@ -187,14 +187,14 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
       <ChartWrapper>
         <ResponsiveContainer aspect={isMobile ? 60 / 22 : 60 / 12}>
           <BarChart margin={{ top: 0, right: 0, bottom: 6, left: 10 }} barCategoryGap={1} data={chartData}>
-            <CartesianGrid stroke="#f5f5f5" />
+            <CartesianGrid stroke="#34fbeb" />
             <XAxis
               tickLine={false}
               axisLine={false}
               interval="preserveEnd"
               minTickGap={80}
               tickMargin={14}
-              tickFormatter={tick => toNiceDate(tick)}
+              tickFormatter={(tick) => toNiceDate(tick)}
               dataKey="dayString"
             />
             <YAxis
@@ -202,7 +202,7 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
               type="number"
               axisLine={false}
               tickMargin={16}
-              tickFormatter={tick => toK(tick)}
+              tickFormatter={(tick) => toK(tick)}
               tickLine={false}
               interval="preserveEnd"
               minTickGap={80}
@@ -210,13 +210,13 @@ const Chart = ({ data, chartOption, currencyUnit, symbol }) => {
             />
             <Tooltip
               cursor={true}
-              formatter={val => toK(val, true)}
-              labelFormatter={label => toNiceDateYear(label)}
+              formatter={(val) => toK(val, true)}
+              labelFormatter={(label) => toNiceDateYear(label)}
               labelStyle={{ paddingTop: 4 }}
               contentStyle={{
                 padding: '10px 14px',
                 borderRadius: 10,
-                borderColor: 'var(--c-zircon)'
+                borderColor: 'var(--c-zircon)',
               }}
               wrapperStyle={{ top: -70, left: -10 }}
             />

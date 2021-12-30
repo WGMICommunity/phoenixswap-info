@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "info.uniswap.org site",
+  "Description": "info.phoenixswap.com site",
   "Outputs": {
     "DeploymentAccessKeyId": {
       "Description": "Access key ID for deploying to the S3 bucket",
@@ -75,7 +75,7 @@
       "Type": "AWS::CertificateManager::Certificate",
       "Description": "The certificate used to secure the CloudFront distribution",
       "Properties": {
-        "DomainName": "info.uniswap.org",
+        "DomainName": "info.phoenixswap.org",
         "ValidationMethod": "DNS",
         "Tags": [
           {
